@@ -1,0 +1,11 @@
+root: true
+env:
+  browser: true
+  es2020: true
+extends:
+  - re-taro
+  - re-taro/react
+  - re-taro/typescript
+  - re-taro/prettier
+parserOptions:
+  project: ./tsconfig.json
