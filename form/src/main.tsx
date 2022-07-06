@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { App } from './app'
 import { ChakraProvider } from '@chakra-ui/react';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { App } from './app';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -9,5 +9,5 @@ ReactDOM.render(
       <App />
     </ChakraProvider>
   </React.StrictMode>,
-  document.querySelector('#root')
-)
+  document.querySelector('#root'),
+);

@@ -1,6 +1,8 @@
 package.json
 tsconfig.json
+tsconfig.node.json
 dist
 pnpm-lock.yaml
 *.config.ts
 *.config.js
+vite-env.d.ts
