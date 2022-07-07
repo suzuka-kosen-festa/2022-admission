@@ -122,6 +122,6 @@ jobs:
         run: pnpm fmt
       - name: auto commit
         uses: stefanzweifel/git-auto-commit-action@v3.0.0
-          with:
-            commit_message: Apply Code Formatter Change
-            ref: ${{ github.head_ref }}
+        with:
+          commit_message: Apply Code Formatter Change
+          ref: ${{ github.head_ref }}
