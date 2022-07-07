@@ -30,7 +30,7 @@ jobs:
             ${{ runner.os }}-
       - name: Install pnpm
         uses: pnpm/action-setup@v2.2.2
-        with: 
+        with:
           version: ${{ env.pnpm-version }}
           run_install: |
             - recursive: true
@@ -58,7 +58,7 @@ jobs:
             ${{ runner.os }}-
       - name: Install pnpm
         uses: pnpm/action-setup@v2.2.2
-        with: 
+        with:
           version: ${{ env.pnpm-version }}
           run_install: |
             - recursive: true
@@ -86,9 +86,42 @@ jobs:
             ${{ runner.os }}-
       - name: Install pnpm
         uses: pnpm/action-setup@v2.2.2
-        with: 
+        with:
           version: ${{ env.pnpm-version }}
           run_install: |
             - recursive: true
       - name: Build
         run: pnpm build
+  format:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.workdir }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
+        with:
+          path: |
+              ~/.pnpm-store
+              ${{ github.workspace }}/.next/cache
+              ~/.cache/ms-playwright
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: ${{ env.pnpm-version }}
+          run_install: |
+            - recursive: true
+      - name: format code
+        run: pnpm fmt
+      - name: auto commit
+        uses: stefanzweifel/git-auto-commit-action@v3.0.0
+          with:
+            commit_message: Apply Code Formatter Change
+            ref: ${{ github.head_ref }}
